@@ -77,12 +77,6 @@ else (LIBUSB_1_LIBRARIES AND LIBUSB_1_INCLUDE_DIRS)
 endif (LIBUSB_1_LIBRARIES AND LIBUSB_1_INCLUDE_DIRS)
 #######
 
-#######find openni2
-  find_path(OPENNI2_INCLUDE_DIRS NAMES OpenNI.h HINTS /usr/local/include/ni2)
-  find_library(OPENNI2_LIBRARY NAMES OpenNI2 libOpenNI2 HINTS /usr/local/lib/ni2 )
-  include_directories(${OPENNI2_INCLUDE_DIRS})
-#######
-
 #######find pcl
   find_package(PCL 1.7 REQUIRED)
   include_directories(${PCL_INCLUDE_DIRS})
@@ -121,6 +115,8 @@ include_directories(${GRABBER_PATH})
 include_directories(${IMPL_PATH})
 include_directories(${LIBUSB_1_INCLUDE_DIRS} ${LIBUSB_1_INCLUDE_DIRS}/libusb-1.0)
 
+add_subdirectory(modules/freenect_cloud_grabber)
+include_directories(modules/freenect_cloud_grabber)
 
   add_executable (pcl_multi_object_recognition pcl_multi_object_recognition.cpp  ${SOURCE_PATH}/Visualizer.cpp  ${SOURCE_PATH}/Cluster.cpp ${SOURCE_PATH}/Keypoints.cpp ${SOURCE_PATH}/Sampling.cpp ${SOURCE_PATH}/Icp.cpp  ${SOURCE_PATH}/Ppfe.cpp ${SOURCE_PATH}/OpenniStreamer.cpp ${SOURCE_PATH}/Error.cpp ${SOURCE_PATH}/find_function.cpp ${SOURCE_PATH}/define.cpp ${SOURCE_PATH}/help.cpp ${SOURCE_PATH}/utils.cpp ${SOURCE_PATH}/KeyDes.cpp ${GRABBER_PATH}/registration.cpp)
 
